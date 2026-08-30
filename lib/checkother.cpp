@@ -998,24 +998,24 @@ void CheckOtherImpl::checkUnreachableSwitchCase()
              tok && tok != scope.bodyEnd;
              tok = tok->next()) {
 
-             // Do not inspect cases belonging to a nested switch.
-             if (Token::simpleMatch(tok, "{") &&
-                 tok->scope()->type == ScopeType::eSwitch) {
-                 tok = tok->link();
-                 continue;
-             }
-             if (!Token::simpleMatch(tok, "case"))
-                 continue;
-             const Token* caseExpression = tok->astOperand1();
-             if (!caseExpression)
-                 continue;
-             const ValueFlow::Value* caseValue =
-                 caseExpression->getKnownValue(ValueFlow::Value::ValueType::INT);
-             if (!caseValue)
-                 continue;
-             if (switchValue->intvalue == caseValue->intvalue)
-                 continue;
-             unreachableSwitchCaseError(tok, caseExpression->expressionString());
+            // Do not inspect cases belonging to a nested switch.
+            if (Token::simpleMatch(tok, "{") &&
+                tok->scope()->type == ScopeType::eSwitch) {
+                tok = tok->link();
+                continue;
+            }
+            if (!Token::simpleMatch(tok, "case"))
+                continue;
+            const Token* caseExpression = tok->astOperand1();
+            if (!caseExpression)
+                continue;
+            const ValueFlow::Value* caseValue =
+                caseExpression->getKnownValue(ValueFlow::Value::ValueType::INT);
+            if (!caseValue)
+                continue;
+            if (switchValue->intvalue == caseValue->intvalue)
+                continue;
+            unreachableSwitchCaseError(tok, caseExpression->expressionString());
         }
     }
 }
