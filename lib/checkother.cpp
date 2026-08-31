@@ -1015,16 +1015,16 @@ void CheckOtherImpl::checkUnreachableSwitchCase()
                 continue;
             if (switchValue->intvalue == caseValue->intvalue)
                 continue;
-            unreachableSwitchCaseError(tok, caseExpression->expressionString());
+            unreachableSwitchCaseError(tok, caseExpression->expressionString(), MathLib::toString(switchValue->intvalue));
         }
     }
 }
 
-void CheckOtherImpl::unreachableSwitchCaseError(const Token* tok, const std::string& caseExpression)
+void CheckOtherImpl::unreachableSwitchCaseError(const Token* tok, const std::string& caseExpression, const std::string& switchValue)
 {
     reportError(tok, Severity::style, "unreachableSwitchCase",
                 "Switch case '" + caseExpression +
-                "' can never be selected because the switch condition has a known value.",
+                "' can never be selected because the switch condition is known to be " + switchValue + ".",
                 CWE561, Certainty::normal);
 }
 
@@ -4968,7 +4968,7 @@ void CheckOther::getErrorMessages(ErrorLogger& errorLogger, const Settings &sett
     c.duplicateExpressionTernaryError(nullptr, ErrorPath{});
     c.duplicateBreakError(nullptr,  false);
     c.unreachableCodeError(nullptr, nullptr,  false);
-    c.unreachableSwitchCaseError(nullptr, "case");
+    c.unreachableSwitchCaseError(nullptr, "case", "0");
     c.unsignedLessThanZeroError(nullptr, nullptr, "varname");
     c.unsignedPositiveError(nullptr, nullptr, "varname");
     c.pointerLessThanZeroError(nullptr, nullptr);

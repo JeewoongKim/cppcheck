@@ -293,7 +293,7 @@ public:
     void redundantCopyError(const Token *tok1, const Token* tok2, const std::string& var);
     void redundantBitwiseOperationInSwitchError(const Token *tok, const std::string &varname);
     void suspiciousCaseInSwitchError(const Token* tok, const std::string& operatorString);
-    void unreachableSwitchCaseError(const Token* tok, const std::string& caseExpression);
+    void unreachableSwitchCaseError(const Token* tok, const std::string& caseExpression, const std::string& switchValue);
     void selfAssignmentError(const Token *tok, const std::string &varname);
     void misusedScopeObjectError(const Token *tok, const std::string &varname, bool isAssignment = false);
     void duplicateBranchError(const Token *tok1, const Token *tok2, ErrorPath errors);

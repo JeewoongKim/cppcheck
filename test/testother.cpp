@@ -6361,7 +6361,7 @@ private:
               "        }\n"
               "    }\n"
               "}\n");
-        ASSERT_EQUALS("[test.cpp:7:9]: (style) Switch case 'B' can never be selected because the switch condition has a known value. [unreachableSwitchCase]\n", errout_str());
+        ASSERT_EQUALS("[test.cpp:7:9]: (style) Switch case 'B' can never be selected because the switch condition is known to be 0. [unreachableSwitchCase]\n", errout_str());
 
         check("void f(int t) {\n"
               "    if (t == 0) {\n"
@@ -6373,7 +6373,7 @@ private:
               "        }\n"
               "    }\n"
               "}\n");
-        ASSERT_EQUALS("[test.cpp:6:9]: (style) Switch case '1' can never be selected because the switch condition has a known value. [unreachableSwitchCase]\n", errout_str());
+        ASSERT_EQUALS("[test.cpp:6:9]: (style) Switch case '1' can never be selected because the switch condition is known to be 0. [unreachableSwitchCase]\n", errout_str());
 
         check("void f(int t) {\n"
               "    switch (t) {\n"
@@ -6401,7 +6401,7 @@ private:
               "        }\n"
               "    }\n"
               "}\n");
-        ASSERT_EQUALS("[test.cpp:12:9]: (style) Switch case '1' can never be selected because the switch condition has a known value. [unreachableSwitchCase]\n", errout_str());
+        ASSERT_EQUALS("[test.cpp:12:9]: (style) Switch case '1' can never be selected because the switch condition is known to be 0. [unreachableSwitchCase]\n", errout_str());
     }
 
     void redundantContinue() {
